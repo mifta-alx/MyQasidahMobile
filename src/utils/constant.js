@@ -1,0 +1,11 @@
+export const primary = "#09755E";
+export const secondary = "#AFAFAF";
+export const secondary300 = "#B8B8B8";
+export const secondary500 = "#E5E5E5";
+export const white = "#FFFFFF";
+export const grey100 = "#F8F8F8";
+export const grey200 = "#F5F4F2";
+export const grey300 = "#EEEEF0";
+export const grey400 = "#E2E3E5";
+export const grey500 = "#7E7D81"; 
+export const black = "#000000";
