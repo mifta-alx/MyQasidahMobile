@@ -50,7 +50,7 @@ const Home = () => {
 
   const getDataQasidah = async () => {
     try {
-      const res = await axios.get(`http://192.168.0.103:3001/qasidahs`);
+      const res = await axios.get(`http://localhost:3001/qasidahs`);
       setData(res.data);
       setFilteredData(res.data);
     } catch (e) {

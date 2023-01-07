@@ -8,8 +8,7 @@ import {
   ScrollView,
 } from 'react-native';
 import {React, useState, useEffect} from 'react';
-import {listQasidah} from '../Home/data';
-import {black, dark_grey, white} from '../../utils/constant';
+import {black, grey500, white} from '../../utils/constant';
 import axios from 'axios';
 const DetailQasidah = ({route}) => {
   const {Id_Qasidah} = route.params;
@@ -18,19 +17,20 @@ const DetailQasidah = ({route}) => {
   const [version, setVersion] = useState('');
   const [reff, setReff] = useState([]);
   const [lirik, setLirik] = useState([]);
+
   const getQasidahById = async () => {
-    const res = await axios.get(
-      `http://192.168.0.103:3001/qasidahs/${Id_Qasidah}`,
-    );
+    const res = await axios.get(`http://localhost:3001/qasidahs/${Id_Qasidah}`);
     setTitle(res.data.title);
     setTitleArabic(res.data.title_arabic);
     setVersion(res.data.version);
-    setReff(res.data.textreff.reverse());
+    setReff(res.data.textreff);
     setLirik(res.data.textlirik);
   };
+
   useEffect(() => {
     getQasidahById();
   }, []);
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
@@ -41,9 +41,46 @@ const DetailQasidah = ({route}) => {
           {reff.map((data, index) => {
             return (
               <View
-                style={{alignItems: 'center', marginVertical: 5}}
-                key={index}>
-                <Text style={styles.reff}>{data.reff}</Text>
+                key={index}
+                style={{
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexDirection: 'row',
+                  width: '100%',
+                }}>
+                {data.reff
+                  .slice(0)
+                  .reverse()
+                  .map((subr, indexsub) => {
+                    const widthReff = subr.subreff == '۰۞۰' ? '10%' : '45%';
+                    const align =
+                      indexsub == 0
+                        ? 'flex-end'
+                        : indexsub == 2
+                        ? 'flex-start'
+                        : 'center';
+                    if (data.reff.length > 1) {
+                      return (
+                        <View
+                          style={{
+                            alignItems: align,
+                            marginVertical: 5,
+                            width: widthReff,
+                          }}
+                          key={indexsub}>
+                          <Text style={styles.reff}>{subr.subreff}</Text>
+                        </View>
+                      );
+                    } else {
+                      return (
+                        <View
+                          style={{alignItems: 'center', marginVertical: 5}}
+                          key={index}>
+                          <Text style={styles.reff}>{subr.subreff}</Text>
+                        </View>
+                      );
+                    }
+                  })}
               </View>
             );
           })}
@@ -51,12 +88,49 @@ const DetailQasidah = ({route}) => {
         <View style={styles.line} />
         <ScrollView showsVerticalScrollIndicator={false}>
           <View style={styles.lirikview}>
-            {lirik.reverse().map((data, index) => {
+            {lirik.map((data, index) => {
               return (
                 <View
-                  style={{alignItems: 'center', marginVertical: 5}}
-                  key={index}>
-                  <Text style={styles.lirik}>{data.lirik}</Text>
+                  key={index}
+                  style={{
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexDirection: 'row',
+                    width: '100%',
+                  }}>
+                  {data.lirik
+                    .slice(0)
+                    .reverse()
+                    .map((subl, indexsub) => {
+                      const widthLirik = subl.sublirik == '۰۞۰' ? '10%' : '45%';
+                      const align =
+                        indexsub == 0
+                          ? 'flex-end'
+                          : indexsub == 2
+                          ? 'flex-start'
+                          : 'center';
+                      if (data.lirik.length > 1) {
+                        return (
+                          <View
+                            style={{
+                              alignItems: align,
+                              marginVertical: 5,
+                              width: widthLirik,
+                            }}
+                            key={indexsub}>
+                            <Text style={styles.reff}>{subl.sublirik}</Text>
+                          </View>
+                        );
+                      } else {
+                        return (
+                          <View
+                            style={{alignItems: 'center', marginVertical: 5}}
+                            key={index}>
+                            <Text style={styles.reff}>{subl.sublirik}</Text>
+                          </View>
+                        );
+                      }
+                    })}
                 </View>
               );
             })}
@@ -100,7 +174,7 @@ const styles = StyleSheet.create({
     color: black,
   },
   reffview: {
-    flexDirection: 'row',
+    // flexDirection: 'row',
     flexWrap: 'wrap-reverse',
     justifyContent: 'center',
   },
@@ -110,7 +184,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-Regular',
   },
   line: {
-    backgroundColor: dark_grey,
+    backgroundColor: grey500,
     height: 0.5,
     width: '80%',
     borderRadius: 10,
