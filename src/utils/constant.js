@@ -8,4 +8,7 @@ export const grey200 = "#F5F4F2";
 export const grey300 = "#EEEEF0";
 export const grey400 = "#E2E3E5";
 export const grey500 = "#7E7D81"; 
+export const grey600 = "#A0A1A6"; 
+export const grey800 = "#616167"; 
+export const darkgrey = "#2A2A2C"; 
 export const black = "#000000";

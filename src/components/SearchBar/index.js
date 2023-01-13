@@ -8,10 +8,12 @@ import {
   secondary300,
   grey300,
   white,
+  grey600,
 } from '../../utils/constant';
 import {SearchNormal, Sort} from 'iconsax-react-native';
+import darkMode from '../../styles/darkMode';
 
-const SearchBar = ({onChangeText, value, asc, onPress}) => {
+const SearchBar = ({onChangeText, value, asc, onPress, theme}) => {
   const IconSorting = () => {
     return asc == true ? (
       <Sort size={24} variant="Linear" color={primary} style={{marginStart: 10}} />
@@ -26,12 +28,12 @@ const SearchBar = ({onChangeText, value, asc, onPress}) => {
   };
   return (
     <View style={{flexDirection: 'row', alignItems: 'center'}}>
-      <View style={styles.search_bar}>
-        <SearchNormal color={grey500} variant="Linear" size={12} />
+      <View style={theme == 'light' ? styles.search_bar : darkMode.search_bar}>
+        <SearchNormal color={theme == 'light' ? grey500 : grey600} variant="Linear" size={12} />
         <TextInput
           placeholder="Cari Qasidah"
-          placeholderTextColor={grey500}
-          style={styles.textsearch}
+          placeholderTextColor={theme == 'light' ? grey500 : grey600}
+          style={theme == 'light' ? styles.textsearch : darkMode.textsearch}
           value={value}
           onChangeText={onChangeText}
         />
@@ -61,5 +63,6 @@ const styles = StyleSheet.create({
     flex: 1,
     marginLeft: 17,
     padding: 0,
+    color: black
   },
 });

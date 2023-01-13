@@ -3,26 +3,22 @@ import {
   Text,
   View,
   SafeAreaView,
-  Dimensions,
-  FlatList,
   ScrollView,
 } from 'react-native';
 import {React, useState, useEffect} from 'react';
 import {black, grey500, white} from '../../utils/constant';
+import darkDetail from '../../styles/darkMode_DetailQasidah';
 import axios from 'axios';
 const DetailQasidah = ({route}) => {
-  const {Id_Qasidah} = route.params;
+  const {Id_Qasidah, theme} = route.params;
   const [title, setTitle] = useState('');
   const [title_arabic, setTitleArabic] = useState('');
-  const [version, setVersion] = useState('');
   const [reff, setReff] = useState([]);
   const [lirik, setLirik] = useState([]);
-
   const getQasidahById = async () => {
-    const res = await axios.get(`http://localhost:3001/qasidahs/${Id_Qasidah}`);
+    const res = await axios.get(`http://myqasidah.up.railway.app/qasidahs/${Id_Qasidah}`);
     setTitle(res.data.title);
     setTitleArabic(res.data.title_arabic);
-    setVersion(res.data.version);
     setReff(res.data.textreff);
     setLirik(res.data.textlirik);
   };
@@ -32,11 +28,11 @@ const DetailQasidah = ({route}) => {
   }, []);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={theme == 'light' ? styles.container : darkDetail.container}>
       <View style={styles.content}>
-        <View style={styles.bar} />
-        <Text style={styles.title_arabic}>{title_arabic}</Text>
-        <Text style={styles.title}>{title}</Text>
+        <View style={theme == 'light' ? styles.bar : darkDetail.bar} />
+        <Text style={theme == 'light' ? styles.title_arabic : darkDetail.title_arabic}>{title_arabic}</Text>
+        <Text style={theme == 'light' ? styles.title : darkDetail.title}>{title}</Text>
         <View style={styles.reffview}>
           {reff.map((data, index) => {
             return (
@@ -63,12 +59,12 @@ const DetailQasidah = ({route}) => {
                       return (
                         <View
                           style={{
-                            alignItems: align,
+                            alignItems: 'center',
                             marginVertical: 5,
                             width: widthReff,
                           }}
                           key={indexsub}>
-                          <Text style={styles.reff}>{subr.subreff}</Text>
+                          <Text style={theme == 'light' ? styles.reff : darkDetail.reff}>{subr.subreff}</Text>
                         </View>
                       );
                     } else {
@@ -113,12 +109,12 @@ const DetailQasidah = ({route}) => {
                         return (
                           <View
                             style={{
-                              alignItems: align,
+                              alignItems: 'center',
                               marginVertical: 5,
                               width: widthLirik,
                             }}
                             key={indexsub}>
-                            <Text style={styles.reff}>{subl.sublirik}</Text>
+                            <Text style={theme == 'light' ? styles.reff : darkDetail.reff}>{subl.sublirik}</Text>
                           </View>
                         );
                       } else {
@@ -126,7 +122,7 @@ const DetailQasidah = ({route}) => {
                           <View
                             style={{alignItems: 'center', marginVertical: 5}}
                             key={index}>
-                            <Text style={styles.reff}>{subl.sublirik}</Text>
+                            <Text style={theme == 'light' ? styles.reff : darkDetail.reff}>{subl.sublirik}</Text>
                           </View>
                         );
                       }
@@ -192,7 +188,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   lirikview: {
-    flexDirection: 'row',
+    // flexDirection: 'row',
     flexWrap: 'wrap-reverse',
     justifyContent: 'center',
   },

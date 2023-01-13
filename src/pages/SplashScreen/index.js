@@ -1,4 +1,4 @@
-import { StyleSheet, StatusBar, SafeAreaView, Image } from 'react-native'
+import { StyleSheet, StatusBar, SafeAreaView, Image, Text } from 'react-native'
 import {React, useEffect} from 'react'
 import { primary } from '../../utils/constant'
 import {Logo} from '../../assets/index'
