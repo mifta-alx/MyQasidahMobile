@@ -32,7 +32,6 @@ const Home = () => {
   const [refreshing, setRefreshing] = useState(false);
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
-  const [noData, setNoData] = useState(false);
   const [asc, setAsc] = useState(true);
   const [theme, setTheme] = useState(Appearance.getColorScheme);
   Appearance.addChangeListener(scheme => {
@@ -84,10 +83,9 @@ const Home = () => {
         return itemData.indexOf(textData) > -1;
       });
       setFilteredData(newData);
-      setNoData(newData.length === 0);
       setkeyword(text);
     } else {
-      setFilteredData(data);
+        setFilteredData(data);
       setkeyword(text);
     }
   };
@@ -175,11 +173,12 @@ const Home = () => {
             onChangeText={text => searchFilter(text)}
             asc={asc}
             onPress={() => setAsc(!asc)}
+            onPress2={() => searchFilter('')}
             theme = {theme}
           />
         </SafeAreaView>
         <View style={{flex: 1, marginBottom: 20}}>
-          {noData ? <NotFound /> : <FlatListQasidah />}
+          {filteredData.length > 0 ? <FlatListQasidah /> : <NotFound/>}
         </View>
       </View>
     </>

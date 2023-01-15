@@ -10,10 +10,10 @@ import {
   white,
   grey600,
 } from '../../utils/constant';
-import {SearchNormal, Sort} from 'iconsax-react-native';
+import {SearchNormal, Sort, CloseCircle} from 'iconsax-react-native';
 import darkMode from '../../styles/darkMode';
 
-const SearchBar = ({onChangeText, value, asc, onPress, theme}) => {
+const SearchBar = ({onChangeText, value, asc, onPress, onPress2, theme}) => {
   const IconSorting = () => {
     return asc == true ? (
       <Sort size={24} variant="Linear" color={primary} style={{marginStart: 10}} />
@@ -37,6 +37,13 @@ const SearchBar = ({onChangeText, value, asc, onPress, theme}) => {
           value={value}
           onChangeText={onChangeText}
         />
+        {
+          value != '' && (
+            <TouchableOpacity onPress={onPress2}>
+            <CloseCircle size={16} variant="Bold" color={theme == 'light' ? grey500 : grey600}/>
+            </TouchableOpacity>
+        )
+        }
       </View>
       <TouchableOpacity onPress={onPress}>
         <IconSorting />
