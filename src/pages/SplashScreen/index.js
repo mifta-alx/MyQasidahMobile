@@ -1,4 +1,4 @@
-import { StyleSheet, StatusBar, SafeAreaView, Image, Text } from 'react-native'
+import { StyleSheet, StatusBar, SafeAreaView, Image, Dimensions } from 'react-native'
 import {React, useEffect} from 'react'
 import { primary } from '../../utils/constant'
 import {Logo} from '../../assets/index'
@@ -21,7 +21,7 @@ const SplashScreen = ({navigation}) => {
     </SafeAreaView>
   )
 }
-
+const windowWidth = Dimensions.get('window').width
 export default SplashScreen
 
 const styles = StyleSheet.create({
@@ -31,4 +31,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent:'center',
   },
+  logosplash:{
+    paddingHorizontal: 20,
+    maxWidth:200,
+    resizeMode:'contain'
+  }
 })

@@ -48,7 +48,7 @@ const DetailQasidah = ({route}) => {
                   .slice(0)
                   .reverse()
                   .map((subr, indexsub) => {
-                    const widthReff = subr.subreff == '۰۞۰' ? '10%' : '45%';
+                    const widthReff = subr.subreff == '۰۞۰' ? '8%' : '46%';
                     const align =
                       indexsub == 0
                         ? 'flex-end'
@@ -62,6 +62,7 @@ const DetailQasidah = ({route}) => {
                             alignItems: 'center',
                             marginVertical: 5,
                             width: widthReff,
+                            justifyContent:'center'
                           }}
                           key={indexsub}>
                           <Text style={theme == 'light' ? styles.reff : darkDetail.reff}>{subr.subreff}</Text>
@@ -98,7 +99,7 @@ const DetailQasidah = ({route}) => {
                     .slice(0)
                     .reverse()
                     .map((subl, indexsub) => {
-                      const widthLirik = subl.sublirik == '۰۞۰' ? '10%' : '45%';
+                      const widthLirik = subl.sublirik == '۰۞۰' ? '8%' : '46%';
                       const align =
                         indexsub == 0
                           ? 'flex-end'
